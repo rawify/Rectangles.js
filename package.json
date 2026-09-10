@@ -1,36 +1,88 @@
 {
     "name": "rectangles",
     "title": "rectangles.js",
-    "version": "0.0.4",
-    "homepage": "https://github.com/infusion/Rectangles.js",
-    "bugs": "https://github.com/infusion/Rectangles.js/issues",
-    "description": "A function collection for working with rectangles",
+    "version": "0.1.0",
+    "type": "commonjs",
+    "description": "Axis-aligned rectangle intersection, containment, bounds, measurement, and conversion utilities",
+    "homepage": "https://github.com/rawify/Rectangles.js",
+    "bugs": "https://github.com/rawify/Rectangles.js/issues",
     "keywords": [
         "rectangle",
         "rectangles",
         "intersection",
         "area",
-        "perimeter"
+        "perimeter",
+        "bounding-box",
+        "aabb",
+        "geometry"
     ],
-    "author": "Robert Eisele <robert@xarg.org> (http://www.xarg.org/)",
-    "main": "rectangles",
     "private": false,
-    "readmeFilename": "README.md",
-    "license": "MIT OR GPL-2.0",
+    "main": "./dist/rectangles.js",
+    "module": "./dist/rectangles.mjs",
+    "browser": "./dist/rectangles.min.js",
+    "unpkg": "./dist/rectangles.min.js",
+    "types": "./dist/rectangles.d.ts",
+    "files": [
+        "dist",
+        "README.md",
+        "LICENSE"
+    ],
+    "exports": {
+        ".": {
+            "import": {
+                "types": "./dist/rectangles.d.mts",
+                "default": "./dist/rectangles.mjs"
+            },
+            "require": {
+                "types": "./dist/rectangles.d.ts",
+                "default": "./dist/rectangles.js"
+            },
+            "default": {
+                "types": "./dist/rectangles.d.ts",
+                "default": "./dist/rectangles.js"
+            }
+        },
+        "./browser": {
+            "import": {
+                "types": "./dist/rectangles.d.mts",
+                "default": "./dist/rectangles.min.mjs"
+            },
+            "default": "./dist/rectangles.min.js"
+        },
+        "./package.json": "./package.json"
+    },
+    "sideEffects": false,
     "repository": {
         "type": "git",
-        "url": "git://github.com/infusion/Rectangles.js.git"
+        "url": "git+https://github.com/rawify/Rectangles.js.git"
     },
+    "funding": {
+        "type": "github",
+        "url": "https://github.com/sponsors/rawify"
+    },
+    "author": {
+        "name": "Robert Eisele",
+        "email": "robert@raw.org",
+        "url": "https://raw.org/"
+    },
+    "license": "MIT",
     "engines": {
-        "node": "*"
+        "node": ">=20"
+    },
+    "directories": {
+        "test": "tests"
     },
     "scripts": {
-        "test": "mocha tests/*.js"
+        "clean": "node scripts/clean.mjs",
+        "typecheck": "tsc --noEmit",
+        "build": "node scripts/build.mjs",
+        "test:types": "tsc -p tests/types/tsconfig.json",
+        "test:runtime": "node --test tests/*.test.js",
+        "test": "npm run typecheck && npm run build && npm run test:types && npm run test:runtime",
+        "prepublishOnly": "npm test"
     },
     "devDependencies": {
-        "mocha": "*",
-        "should": "*",
-        "gulp": "*",
-        "google-closure-compiler": "*"
+        "esbuild": "^0.25.12",
+        "typescript": "^5.9.3"
     }
 }

@@ -1,0 +1,6 @@
+{
+  "$schema": "https://context7.com/schema/context7.json",
+  "projectTitle": "Rectangles.js",
+  "description": "Rectangle normalization, measurement, containment, intersection, union, and subdivision helpers.",
+  "excludeFolders": ["dist", "node_modules", "coverage", "_"]
+}
